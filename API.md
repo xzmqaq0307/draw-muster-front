@@ -18,7 +18,8 @@ password: "123456"
 	"code": 200,
 	"msg": "success",
 	"data": {
-		"user_id": "abdcd",  //用户获取其他信息的唯一标识
+		/* openid是用户的唯一标识，可发送到后台换取信息，有时间限制，可保持登录态*/
+		"openid": "PEV5Y6AZS4CX5RPMZ5TM6GGR4CWWXSQP",
 		"nickname": "北风那个吹",
 		"address": "地址"
 		"phone": "123456"
@@ -37,7 +38,7 @@ GET /paint/api/v1/favlist
 
 参数
 ```
-user_id: "abdcd"
+openid: "abdcd"
 ```
 
 返回
@@ -82,7 +83,6 @@ fav_id: "2312412"
 	"msg": "success",
 	"data": [
 		{
-			"id": "1"
 			"col_name": "画画名称",
 			"col_path": "http://www.weixiaoyuan.xyz/picture/xxx.png"
 			"col_time": "2020-2-3"
@@ -128,6 +128,7 @@ verifycode: "atsd"
 }
 ```
 
+
 ### 用户名验证
 ```
 GET /paint/api/v1/nickname
@@ -158,6 +159,30 @@ nickname: "北风那个吹"
 }
 ```
 
+
+### 验证码获取
+```
+GET /paint/api/v1/verifyemail
+```
+
+参数
+```
+email: "123456@163.com"
+```
+
+返回
+```
+{
+	"code": 200,
+	"msg": "success",
+	"data": {
+		"email": "123456@163.com".
+		"email_ticket": "email_ticket_PEV5Y6AZS4CX5RPMZ5TM6GGR4CWWXSQP",
+		"retry_time": 60
+	}
+}
+```
+
 ### 轮播图
 ```
 GET /paint/api/v1/carousel
@@ -174,7 +199,7 @@ GET /paint/api/v1/carousel
 	"msg": "success",
 	"data": [
 		{
-			"id": "1234",
+			"id": 1,
 			"img_path": "/img/1.png"
 			"img_intro": "jianjie"
 			"img_href": "http://www.weixiaoyuan.xyz/static/img/1.png"
