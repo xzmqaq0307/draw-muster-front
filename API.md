@@ -6,13 +6,13 @@
 POST /paint/api/v1/login
 ```
 
-#### 参数
+参数
 ```
 account: "123456"
 password: "123456"
 ```
 
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -35,12 +35,12 @@ password: "123456"
 GET /paint/api/v1/favlist
 ```
 
-#### 参数
+参数
 ```
 user_id: "abdcd"
 ```
 
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -53,7 +53,7 @@ user_id: "abdcd"
 			"sum": 10,
 			"public_status": 0
 		},
-		
+
 		{
 			"id": "用户收藏夹id",
 			"fav_name": "收藏夹名称2",
@@ -70,12 +70,12 @@ user_id: "abdcd"
 GET /paint/api/v1/colletion
 ```
 
-#### 参数
+参数
 ```
 fav_id: "2312412"
 ```
 
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -98,7 +98,7 @@ fav_id: "2312412"
 POST /paint/api/v1/register
 ```
 
-#### 参数
+参数
 ```
 email: "123456@163.com"
 nickname: "北风那个吹"
@@ -107,7 +107,7 @@ repassword: "123456"
 verifycode: "atsd"
 ```
 
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -127,37 +127,17 @@ verifycode: "atsd"
 	}
 }
 ```
-```
-{
-	"code": 200,
-	"msg": "error",
-	"data": {
-		"error_code": "1002",
-		"description": "验证码错误"
-	}
-}
-```
-```
-{
-	"code": 200,
-	"msg": "error",
-	"data": {
-		"error_code": "1003",
-		"description": "验证码过期"
-	}
-}
-```
 
 ### 用户名验证
 ```
 GET /paint/api/v1/nickname
 ```
 
-#### 参数
+参数
 ```
 nickname: "北风那个吹"
 ```
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -178,40 +158,16 @@ nickname: "北风那个吹"
 }
 ```
 
-
-### 验证码获取
-```
-GET /paint/api/v1/verifyemail
-```
-
-#### 参数
-```
-email: "123456@163.com"
-```
-
-#### 返回
-```
-{
-	"code": 200,
-	"msg": "success",
-	"data": {
-		"email": "123456@163.com".
-		"email_ticket": "email_ticket_PEV5Y6AZS4CX5RPMZ5TM6GGR4CWWXSQP",
-		"retry_time": 60
-	}
-}
-```
-
 ### 轮播图
 ```
 GET /paint/api/v1/carousel
 ```
 
-#### 参数
+参数
 ```
 无
 ```
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -232,14 +188,14 @@ GET /paint/api/v1/carousel
 GET /paint/api/v1/annoucement
 ```
 
-#### 参数
+参数
 ```
 start: 0
 end: 10,
 num: 10
 ```
 
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -272,11 +228,11 @@ num: 10
 GET /paint/api/v1/community
 ```
 
-#### 参数
+参数
 ```
 无
 ```
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -297,12 +253,12 @@ GET /paint/api/v1/community
 GET /paint/api/v1/picture
 ```
 
-#### 参数
+参数
 ```
 picture_id: 2
 ```
 
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -338,7 +294,7 @@ picture_id: 2
 GET /paint/api/v1/all
 ```
 
-#### 参数
+参数
 ```
 // 每一页加载20条数据
 type: all
@@ -346,7 +302,7 @@ start: 0,
 end: 20,
 num: 20
 ```
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -379,7 +335,7 @@ num: 20
 GET /paint/api/v1/all
 ```
 
-#### 参数
+参数
 ```
 // 每一页加载20条数据
 type: label
@@ -387,7 +343,7 @@ start: 0,
 end: 20,
 num: 20
 ```
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -420,7 +376,7 @@ num: 20
 GET /paint/api/v1/all
 ```
 
-#### 参数
+参数
 ```
 // 每一页加载20条数据
 type: time
@@ -429,6 +385,7 @@ end: 20,
 num: 20
 ```
 
+返回
 ```
 {
 	"code": 200,
@@ -461,12 +418,12 @@ num: 20
 GET /paint/api/v1/recommend
 ```
 
-#### 参数
+参数
 ```
 无
 ```
 
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -487,12 +444,12 @@ GET /paint/api/v1/recommend
 GET /paint/api/v1/recommend
 ```
 
-#### 参数
+参数
 ```
 无
 ```
 
-#### 返回
+返回
 ```
 {
 	"code": 200,
@@ -507,7 +464,6 @@ GET /paint/api/v1/recommend
 	]
 }
 ```
-
 
 
 
