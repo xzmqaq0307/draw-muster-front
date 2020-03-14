@@ -1,10 +1,19 @@
-
 # API
+
+## 阅前说明
+
 ```
 网址：http://www.weixiaoyuan.xyz:8081
-对应接口的使用: http://www.weixiaoyuan.xyz:8081 + 接口名称
-数据返回code说明: 成功(200)，失败(400)，服务器内部错误(500)
+* 对应接口的使用: http://www.weixiaoyuan.xyz:8081/paint + 接口名称(千万不要忽略了/paint)
+* 数据返回code说明: 成功(200)，失败(400)，服务器内部错误(500)
+说明：
+* 请求参数都是JSON格式、返回的参数也都是JSON格式！！！！
+* 轮播图板块接口、画家榜板块接口暂时未投入使用
+* 注明修改的V1版本修改接口，基本都是修改了参数的命名格式，如pic_list修改成picList
+* 注明新增的V2版本接口是更新的接口
 ```
+
+## 目录
 
 - [API](#api)
 - [用户注册](#用户注册)
@@ -69,10 +78,10 @@ nickname: 昵称
 }
 ```
 
-#### 检验姓名是否存在（接口）
+#### 检验姓名是否存在（接口）(<font color="blue">v1版本修改</font>)
 
 ```
-GET /api/v1/user/register/checkname
+GET /api/v1/user/register/check/name
 ```
 **参数**
 ```
@@ -94,10 +103,10 @@ nickname: 北风那个吹
 }
 ```
 
-#### 检验邮箱是否存在（接口）
+#### 检验邮箱是否存在（接口）(<font color="blue">v1版本修改</font>)
 
 ```
-GET /api/v1/user/register/checkemail
+GET /api/v1/user/register/check/email
 ```
 **参数**
 ```
@@ -119,9 +128,9 @@ email: 1061138927@qq.com
 }
 ```
 
-#### 获取账户验证码
+#### 获取账户验证码(<font color="blue">v1版本修改</font>)
 ```
-GET /api/v1/user/register/getcode
+GET /api/v1/user/register/get/code
 ```
 **参数**
 ```
@@ -139,9 +148,9 @@ email: 1061138927@qq.com
 }
 ```
 
-#### 验证用户验证码
+#### 验证用户验证码(<font color="blue">v1版本修改</font>)
 ```
-GET /api/v1/user/register/checkcode
+GET /api/v1/user/register/check/code
 ```
 **参数**
 ```
@@ -197,17 +206,18 @@ password: 密码
 }
 ```
 
-## 修改用户信息
+## 修改用户信息(<font color="blue">v1版本修改</font>)
 
 **接口**
 ```
-POST /api/v1/user/modifymsg
+POST /api/v1/user/update/msg
 ```
 **请求头部**
 ```
 "Authorization": "用户的token"
 ```
 **请求参数**
+
 ```
 sex: 0为女，1为男
 nickName: 姓名，
@@ -216,6 +226,41 @@ introduction： 个人简介
 ```
 
 **返回**
+```
+{
+	"code": 200,
+	"msg": "success"
+}
+```
+
+## 修改用户密码(<font color="blue">v2版本新增</font>)
+
+**接口**
+
+```
+GET /api/v1/user/register/get/code
+GET /api/v1/user/register/check/code
+POST /api/v1/user/change/pwd
+```
+
+**接口解释**
+
+```
+1、第一个接口是调用验证码接口获取验证码
+2、第二个接口是验证验证码是否正确
+3、第三个接口是验证码通过之后便可以更改密码
+```
+
+**请求参数**
+
+```
+前两个接口上述已有说明
+第三个接口参数
+"password": "q123456"
+```
+
+**返回**
+
 ```
 {
 	"code": 200,
@@ -282,11 +327,11 @@ GET /api/v1/fav/list
 }
 ```
 
-## 收藏夹内容
+## 收藏夹内容(<font color="blue">v1版本修改</font>)
 
 **接口**
 ```
-GET /fav/content
+GET /api/v1/fav/content
 ```
 **请求头部**
 ```
@@ -294,7 +339,7 @@ GET /fav/content
 ```
 **请求参数**
 ```
-"fav_id": 5  //  收藏夹ID
+"favId": 5  //  收藏夹ID
 "start": 0   //  从第几条开始
 "sum": 10    //  共返回几条，一般来说是10条
 ```
@@ -328,7 +373,7 @@ GET /fav/content
 }
 ```
 
-## 添加作品到收藏夹
+## 添加作品到收藏夹 (<font color="blue">v1版本修改</font>)
 
 **接口**
 ```
@@ -340,8 +385,8 @@ POST /api/v1/fav/add/content
 ```
 **请求参数**
 ```
-"fav_id": 5,         // 收藏夹id号
-"pic_id": 39,        // 图片id号
+"favId": 5,         // 收藏夹id号
+"picId": 39,        // 图片id号
 ```
 **返回内容**
 ```
@@ -351,6 +396,71 @@ POST /api/v1/fav/add/content
 }
 ```
 
+## 删除整个收藏夹 (<font color="blue">v1版本修改</font>)
+
+**接口**
+
+```
+GET /api/v1/fav/del
+```
+
+**请求头部**
+
+```
+"Authorization": "用户的token"
+```
+
+**请求参数**
+
+```
+"favId": 5
+```
+
+**返回内容**
+
+```
+{
+    "code": 200,
+    "msg": "success"
+}
+```
+
+## 删除收藏夹某一个内容(<font color="blue">v1版本修改</font>)
+
+**接口**
+
+```
+GET /paint/api/v1/fav/del/content
+```
+
+**请求头部**
+
+```
+"Authorization": "用户的token"
+```
+
+**请求参数**
+
+```
+"picList": [38,39],
+"favId": 5
+```
+
+**参数说明**
+
+```
+picList是图片对应的ID号
+favId是收藏夹对应的ID号
+```
+
+**返回内容**
+
+```
+{
+    "code": 200,
+    "msg": "success"
+}
+```
 
 ## 创建画册
 
@@ -622,10 +732,10 @@ GET /api/v1/theme/add/content
 }
 ```
 
-
 ## 获取某个用户创建的主题列表
 
 **接口**
+
 ```
 GET /api/v1/theme/user/list
 ```
@@ -663,7 +773,7 @@ GET /api/v1/theme/user/list
 }
 ```
 
-## 创建画画
+## 创建画画(<font color="blue">v1版本修改</font>)
 
 **接口**
 ```
@@ -677,18 +787,19 @@ POST /api/v1/picture/create
 ```
 "album_id": 画册的id，
 "picture_path": 这里需要调用上传图片的api，得到上传后返回的图片存储路径，再填写
-"track_path": 这里需要调用上传视频的api，得到上传后返回的视频存储路径，再填写
+"track_path":   这里需要调用上传视频的api，得到上传后返回的视频存储路径，再填写
 ```
 **请求参数**
+
 ```
-"picture_name": "画画名字",
-"picture_intro": "画画的介绍",
-"public_status": 0为私密，1为公开，
-"album_id": 3
-"label_name": ["标签一","标签二"],
-"picture_path": "画存储的路径"
+"pictureName": "画画名字",
+"pictureIntro": "画画的介绍",
+"publicStatus": 0为私密，1为公开，
+"albumId": 3
+"labelName": ["标签一","标签二"],
+"picturePath": "画存储的路径"
 "type": "picture"
-"track_path": "视频存储路径"
+"trackPath": "视频存储路径"
 ```
 **返回内容**
 ```
@@ -813,10 +924,29 @@ orderByHot: 1为随热度升序， 0为降序。默认为1
 "orderByHot": 1,
 ```
 **返回内容**
+
 ```
 {
-	"code": 200,
-	"msg": "success",
+    "code": 200,
+    "msg": "success",
+    "data": [
+        {
+            "id": 38,
+            "type": "picture",
+            "pictureName": "最后的晚餐",
+            "pictureIntro": "这是我的第一幅画",
+            "picturePath": "这是图片的路径",
+            "createTime": "2020-02-22 18:17:00",
+            "trackPath": "这是视频的路径",
+            "likes": 1,
+            "userInfo": {
+                "id": 60348,
+                "nickname": "Ventidate",
+                "introduction": "二手画家",
+                "avatar": "头像"
+            }
+        }
+    ]
 }
 ```
 
@@ -850,9 +980,306 @@ GET /api/v1/search/user
 }
 ```
 
+## 创建评论(<font color="blue">v2版本新增</font>)
 
+**接口**
 
+```
+GET /api/v1/comment/create
+```
 
+**请求参数**
+
+```
+"content": "这是评论的内容",
+"type": 1,
+"belongId": 38
+```
+
+**请求参数解释**
+
+```
+type：0为公告下的评论，1为画作下的评论
+belongId：这个指的是在哪个作品的id下的
+```
+
+**返回数据**
+
+```
+{
+	"code": 200,
+	"msg": "success"
+}
+```
+
+## 回复某条评论(<font color="blue">v2版本新增</font>)
+
+**接口**
+
+```
+GET /api/v1/comment/create/reply
+```
+
+**参数**
+
+```
+"commentId": 1,
+"content": "这是回复的内容",
+"ruid": 60349,
+"uid":  60348
+```
+
+**参数解释**
+
+```
+commentId：指的是回复哪一条评论的id号
+ruid: 指的是回复人id号
+uid: 指的是被回复人的id号
+```
+
+**返回**
+
+```
+{
+	"code": 200,
+	"msg": "success"
+}
+```
+
+## 查询某个页面下的所有评论(<font color="blue">v2版本新增</font>)
+
+**接口**
+
+```
+GET /api/v1/comment/get
+```
+
+**参数**
+
+```
+"start": 0
+"sum": 10
+"type": 1
+"belongId": 38
+```
+
+**返回**
+
+```
+{
+    "code": 200,
+    "msg": "success",
+    "data": [
+        {
+            "uid": 60348,
+            "comments": "这是第二条评论",
+            "commentType": 1,
+            "belongId": 38,
+            "createTime": "2020-02-25 11:10:04",
+            "likes": 0,
+            "commentId": 2,
+            "replies": [
+                {
+                    "comments": "这是第四条回复",
+                    "uid": 60348,
+                    "ruid": 60349,
+                    "createTime": "2020-03-13 21:06:14",
+                    "likes": 0,
+                    "replyId": 7
+                }
+            ]
+        },
+        {
+            "uid": 60348,
+            "comments": "这是第二条评论",
+            "commentType": 1,
+            "belongId": 38,
+            "createTime": "2020-03-13 21:07:30",
+            "likes": 0,
+            "commentId": 3,
+            "replies": [
+                {
+                    "comments": "这是第五条回复",
+                    "uid": 60348,
+                    "ruid": 60349,
+                    "createTime": "2020-03-13 21:06:46",
+                    "likes": 0,
+                    "replyId": 8
+                }
+            ]
+        }
+    ]
+}
+```
+
+## 查看某个评论下的回复(<font color="blue">v2版本新增</font>)
+
+**接口**
+
+```
+GET /api/v1/comment/get/reply
+```
+
+**参数**
+
+```
+"start": 0,
+"sum": 10,
+"commentId": 1
+```
+
+**返回**
+
+```
+{
+    "code": 200,
+    "msg": "success",
+    "data": [
+        {
+            "comments": "这是第四条回复",
+            "uid": 60348,
+            "ruid": 60349,
+            "createTime": "2020-03-13 21:06:14",
+            "likes": 0,
+            "replyId": 7
+        },
+        {
+            "comments": "这是第六条回复",
+            "uid": 60348,
+            "ruid": 60349,
+            "createTime": "2020-03-13 21:09:20",
+            "likes": 0,
+            "replyId": 9
+        }
+    ]
+}
+```
+
+## 删除某条回复(<font color="blue">v2版本新增</font>)
+
+**接口**
+
+```
+GET /api/v1/comment/delete/reply
+```
+
+**参数**
+
+```
+"replyId": 1
+```
+
+**返回**
+
+```
+{
+    "code": 200,
+    "msg": "success"
+}
+```
+
+## 删除某条评论（以及下面所有回复）(<font color="blue">v2版本新增</font>)
+
+**接口**
+
+```
+GET /api/v1/comment/delete/commentId
+```
+
+**参数**
+
+```
+"commentId": 1
+```
+
+**返回**
+
+```
+{
+    "code": 200,
+    "msg": "success"
+}
+```
+
+## 点赞(<font color="blue">v2版本新增</font>)
+
+**接口**
+
+```
+GET /api/v1/like/change/status
+```
+
+**参数**
+
+```
+"likeStatus": 0,
+"belongId": 60348,
+"likeType": 1
+```
+
+**参数解释**
+
+```
+likeStatus: 点赞的状态，
+belongId: 点赞的ID号，（如评论ID号，用户ID号等）
+likeType: 点赞类型（0为评论，1为用户）
+```
+
+**返回**
+
+```
+{
+    "code": 200,
+    "msg": "success"
+}
+```
+
+## 获取公告列表(<font color="blue">v2版本新增</font>)
+
+**接口**
+
+```
+GET /api/v1/announce/get/list
+```
+
+**参数**
+
+```
+"start":  0
+"sum" :  10
+```
+
+**参数解释**
+
+```
+start代表从第几条开始，sum代表返回多少条
+比如说第0条开始返回10条，那么下一页获取10条是从第11条开始获取新10条数据，以此类推
+```
+
+**返回**
+
+```
+{
+    "code": 200,
+    "msg": "success",
+    "data": [
+        {
+            "id": 1,
+            "anTitle": "公告一",
+            "anContent": "这是公告一的内容",
+            "createTime": "2020-02-27 00:57:42",
+            "likes": 0
+        },
+        {
+            "id": 2,
+            "anTitle": "公告二",
+            "anContent": "这是公告二的内容",
+            "createTime": "2020-02-27 01:16:50",
+            "likes": 3
+        }
+    ]
+}
+```
 
 
 
